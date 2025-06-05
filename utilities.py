@@ -126,7 +126,7 @@ def fetch_publications(profile_url, verbose = True):
             print("\n")
 
         # Sort the publications
-        publications.sort(key=lambda x: x.get('year', 0), reverse=False)
+        publications.sort(key=lambda x: int(x.get('year', 0)) if x.get('year', 'N/A') != 'N/A' else 0, reverse=False)
 
         return publications
 
@@ -218,9 +218,9 @@ def save_to_file(pub, path, folder, verbose):
     if isinstance(authors, str):
         authors = [author.strip() for author in authors.split(" and ")]
 
-    # Apply **formatting** for "Simon Gravelle"
+    # Apply **formatting** for "Colton Botta"
     formatted_authors = [
-        f"**{author}**" if author == "Simon Gravelle" else author for author in authors
+        f"**{author}**" if author == "Colton Botta" else author for author in authors
     ]
     authors_str = ", ".join(f'"{author}"' for author in formatted_authors)
 
